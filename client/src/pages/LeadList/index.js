@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
+import "./style.css";
 
 export default function LeadList() {
   const [leads, setLeads] = useState([]);
@@ -11,6 +12,17 @@ export default function LeadList() {
     }
     loadLeads();
   }, []);
+
+  async function handleDelete(id) {
+    if (window.confirm("Deseja realmente excluir esse registro?")) {
+      var result = await api.delete("/api/leads/" + id);
+      if (result.status === 200) {
+        window.location.href = "/leads";
+      } else {
+        alert("Ocorreu um erro. Tente novamente!");
+      }
+    }
+  }
 
   return (
     <table>
@@ -24,10 +36,11 @@ export default function LeadList() {
             <td>{lead.nome_lead}</td>
             <td>{lead.email_lead}</td>
             <td>
-              <button>Atualizar</button>
+              {/* href não funciona */}
+              <button href={"/form-atualizar/" + lead._id}>Atualizar</button>
             </td>
             <td>
-              <button>Deletar</button>
+              <button onClick={() => handleDelete(lead._id)}>Deletar</button>
             </td>
           </tr>
         ))}

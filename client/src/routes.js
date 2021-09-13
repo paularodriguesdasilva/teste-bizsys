@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Form from "./pages/Form";
+import FormCadastro from "./pages/FormCadastro";
+import FormAtualizar from "./pages/FormAtualizar";
 import LeadList from "./pages/LeadList";
 
 export default function Routes() {
@@ -10,7 +11,8 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/form" exact component={Form} />
+        <Route path="/form-cadastrar" exact component={FormCadastro} />
+        <Route path="/form-atualizar/:idLead" exact component={FormAtualizar} />
         <Route path="/leads" exact component={LeadList} />
       </Switch>
     </BrowserRouter>
